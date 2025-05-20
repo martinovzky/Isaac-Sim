@@ -6,7 +6,6 @@ This project implements PID control and inverse kinematics for a robot arm in NV
 
 1. **PID Control** - Implementing PID controllers for accurate joint position control
 2. **Inverse Kinematics** - Solving the inverse kinematics problem for trajectory planning
-3. **Trajectory Generation** - Creating smooth trajectories for the robot arm to follow
 
 The code is designed to be developed locally and then run in Isaac Sim on an Azure Omniverse VM.
 
@@ -19,24 +18,9 @@ The code is designed to be developed locally and then run in Isaac Sim on an Azu
 3. **RobotArmController** - High-level controller combining PID and kinematics
 4. **Main Program** - Demonstrates the robot arm following a square trajectory
 
-### Mathematical Background
-
-#### PID Control
-
-The PID controller implements the standard PID control law:
-
-```
-u(t) = Kp * e(t) + Ki * ∫e(t)dt + Kd * de(t)/dt
-```
-
-Where:
-- u(t) is the control signal
-- e(t) is the error (difference between setpoint and process variable)
-- Kp, Ki, and Kd are the proportional, integral, and derivative gains
-
 #### Inverse Kinematics
 
-Use Isaac Lab built in Differential IK controller.
+Use Isaac Lab built in Differential IK controller class IKSolver.
 
 ## Running the Project
 
@@ -53,12 +37,7 @@ This will run the simulation and output the robot arm's trajectory, position, an
 ### On Azure Omniverse VM
 
 1. Clone the repository on your Azure VM
-2. Uncomment the Isaac Sim imports and setup code in main.py
-3. Run the script with Isaac Sim:
 
-```bash
-./<path_to_isaac_sim>/python.sh main.py
-```
 
 ## Requirements
 
@@ -68,7 +47,6 @@ This will run the simulation and output the robot arm's trajectory, position, an
 
 ## Future Improvements
 
-- Extend to more degrees of freedom
 - Add collision avoidance
 - Implement joint velocity and acceleration limits
 - Add visualization tools
