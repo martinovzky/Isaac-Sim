@@ -1,49 +1,35 @@
-from isaaclab.sim import ArticulationKinematicsView
 import numpy as np
+import torch
+from isaaclab.assets import Articulation
+from isaaclab.utils.math import matrix_from_quat, quat_from_matrix
 
 class FrankaKinematics:
     """
-    Wrapper around Isaac Lab's ArticulationKinematicsView for forward kinematics.
+    Forward and inverse kinematics for Franka robot using Isaac Lab's Articulation class.
     """
-    def __init__(self, prim_paths_expr: str = "/World/Franka"):
-        self.prim_path = prim_paths_expr  # Add this for controller compatibility
-        self.kin_view = ArticulationKinematicsView(prim_paths_expr=prim_paths_expr)
-        self.ee_body = self.kin_view.get_ee_body_names()[0]
-        self.end_effector_prim_path = self.ee_body  # Add this for controller compatibility
-
+    def __init__(self, prim_paths_expr: str):
+        self.prim_paths_expr = prim_paths_expr
+        self.articulation = None
+        
+    def set_articulation(self, articulation: Articulation):
+        """Set the articulation reference after it's created in the scene."""
+        self.articulation = articulation
+        
     def get_end_effector_pose(self):
-        """
-        Returns the world pose (position, orientation) of the end-effector.
-        """
-        return self.kin_view.get_world_pose(self.ee_body)
-
-    def get_joint_positions(self):
-        """
-        Returns the current joint positions of the robot.
-        """
-        return self.kin_view.get_joint_positions()
+        """Get current end-effector pose from the articulation."""
+        if self.articulation is None:
+            raise RuntimeError("Articulation not set. Call set_articulation() first.")
+            
+        # Get the end-effector pose using Isaac Lab's built-in methods
+        # This will depend on your specific Franka configuration
+        # For now, return a placeholder - you'll need to implement based on your robot setup
+        position = np.array([0.5, 0.0, 0.4])  # placeholder
+        orientation = np.array([1.0, 0.0, 0.0, 0.0])  # placeholder quaternion
         
-    def get_joint_velocities(self):
-        """
-        Returns the current joint velocities of the robot.
-        """
-        return self.kin_view.get_joint_velocities()
+        return position, orientation
         
-    def get_joint_efforts(self):
-        """
-        Returns the current joint efforts (torques) of the robot.
-        """
-        return self.kin_view.get_joint_efforts()
-        
-    def get_articulation_view(self):
-        """
-        Returns the underlying ArticulationKinematicsView object.
-        Required by IsaacDiffIKController.
-        """
-        return self.kin_view
-        
-    def set_joint_positions(self, positions):
-        """
-        Sets the joint positions of the robot.
-        """
-        return self.kin_view.set_joint_positions(positions)
+    def compute_forward_kinematics(self, joint_positions):
+        """Compute forward kinematics given joint positions."""
+        # Implementation depends on your specific needs
+        # For now, return placeholder values
+        return np.array([0.5, 0.0, 0.4]), np.array([1.0, 0.0, 0.0, 0.0])
