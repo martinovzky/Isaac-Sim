@@ -19,22 +19,7 @@ The code is designed to be developed locally and then run in Isaac Sim on an Azu
 3. **RobotArmController** - High-level controller combining PID and kinematics
 4. **Main Program** - Demonstrates the robot arm following a square trajectory
 
-### Mathematical Background
-
-#### PID Control
-
-The PID controller implements the standard PID control law:
-
-```
-u(t) = Kp * e(t) + Ki * ∫e(t)dt + Kd * de(t)/dt
-```
-
-Where:
-- u(t) is the control signal
-- e(t) is the error (difference between setpoint and process variable)
-- Kp, Ki, and Kd are the proportional, integral, and derivative gains
-
-#### Inverse Kinematics
+### Inverse Kinematics
 
 Use Isaac Lab built in Differential IK controller.
 
